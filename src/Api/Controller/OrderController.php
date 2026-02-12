@@ -2,15 +2,18 @@
 
 namespace App\Api\Controller;
 
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 class OrderController extends AbstractController
 {
-    #[Route('/api/order/create', name: 'api_order_create', methods: ['GET'])]
-    public function create(): Response
+    #[Route('/api/order/{id}', name: 'get_order', methods: ['GET'])]
+    public function getOrder(int $id, LoggerInterface $logger): Response
     {
-        return $this->json(['success' => true, 'message' => 'Order created successfully']);
+        $logger->info('Order get '. $id);
+        return $this->json(['success' => true, 'message' => 'Order is here']);
+
     }
 }
